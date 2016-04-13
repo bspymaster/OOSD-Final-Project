@@ -22,6 +22,14 @@ public class Safe {
         }
     }
     
+    public Key getKeyByUsername(String username){
+        int index = findKeyIndex(username,"username");
+        if(index == -1){
+            return null; //matched key not found
+        }else{
+            return keyList.get(index); //returns key with matching name
+        }
+    }
     public Key getKeyByName(String name){
         int index = findKeyIndex(name,"name");
         if(index == -1){
@@ -31,7 +39,7 @@ public class Safe {
         }
     }
     
-    public ArrayList getKeyList(){
+    public ArrayList<Key> getKeyList(){
         return keyList;
     }
     
@@ -48,6 +56,11 @@ public class Safe {
         for(int i = 0; i < keyList.size(); i++){
             if(field.equals("name")){
                 if(keyList.get(i).getName().equals(searchTerm)){
+                    return i;
+                }
+            }
+            else if(field.equals("username")){
+                if(keyList.get(i).getUsername().equals(searchTerm)){
                     return i;
                 }
             }

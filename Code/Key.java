@@ -1,18 +1,21 @@
 public class Key {
     private String name;
+    private String username;
     private Password pass;
     private String description;
     private String address;
     
-    public Key(String _name, Password _pass){
+    public Key(String _name, String _username, Password _pass){
         name = _name;
+        username = _username;
         pass = _pass;
         description = "";
         address = "";
     }
     
-    public Key(String _name, Password _pass, String _description, String _address){
+    public Key(String _name, String _username, Password _pass, String _description, String _address){
         name = _name;
+        username = _username;
         pass = _pass;
         description = _description;
         address = _address;
@@ -20,6 +23,9 @@ public class Key {
     
     public String getName(){
         return name;
+    }
+    public String getUsername(){
+        return username;
     }
     public Password getPasswordObj(){
         return pass;
@@ -33,6 +39,9 @@ public class Key {
     
     public void setName(String _name){
         name = _name;
+    }
+    public void setUsername(String _username){
+        username = _username;
     }
     public void setPassword(Password _pass){
         pass = _pass;
