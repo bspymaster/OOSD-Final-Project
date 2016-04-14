@@ -113,7 +113,16 @@ public class MainWindowUI extends JFrame {
         removeKeyButton.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent event){
-                    System.out.println("generate a new window to remove a new key");
+                    int[] removeIndices = listBox.getSelectedIndices();
+                    if(removeIndices.length > 0){
+                        int optionSelected = JOptionPane.showConfirmDialog(mainWindow,"Are you sure you want to delete the selected key(s)?","Confirm Deletion",JOptionPane.YES_NO_OPTION); //0 if yes, 1 if no
+                        if(optionSelected == 0){
+                            for(int i = 0; i < removeIndices.length; i++){
+                                safe.removeKeyByIndex(removeIndices[i]-i);//remove the original index minus the number of indices already removed (since after removing a key, the rest get shifted down to fill the space)
+                            }
+                            updateJList(safe.getKeyList());
+                        }
+                    }
                 }
             }
         );

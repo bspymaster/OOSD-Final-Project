@@ -51,6 +51,13 @@ public class Safe {
             return keyList.remove(index); //returns key that was removed
         }
     }
+    public Key removeKeyByIndex(int index){
+        if(index < 0){
+            return null; //invalid index
+        }else{
+            return keyList.remove(index); //returns key that was removed
+        }
+    }
     
     private int findKeyIndex(Object searchTerm, String field){
         for(int i = 0; i < keyList.size(); i++){
