@@ -9,6 +9,7 @@ public class MainWindowUI extends JFrame {
     //the safe
     private Safe safe;
     private int okButtonMode; //0 for off, 1 for add key, 2 for edit key
+    private int editIndex; //index of the smallest item selected, for key editing purposes
     
     //main window elements
     private JPanel mainWindow;
@@ -142,7 +143,7 @@ public class MainWindowUI extends JFrame {
         editKeyButton.addActionListener(
             new ActionListener(){
                 public void actionPerformed(ActionEvent event){
-                    int editIndex = listBox.getSelectedIndex();
+                    editIndex = listBox.getSelectedIndex();
                     
                     if(editIndex > -1){
                         Key keyToModify = safe.getKeyByIndex(editIndex);
@@ -243,7 +244,8 @@ public class MainWindowUI extends JFrame {
                     if(okButtonMode == 1){
                         safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText()),s_websiteField.getText(),s_descriptionField.getText()));
                     }else if(okButtonMode == 2){
-                        System.out.println("edit the key");
+                        safe.removeKeyByIndex(editIndex);
+                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText()),s_websiteField.getText(),s_descriptionField.getText()));
                     }
                     okButtonMode = 0;
                     updateJList(safe.getKeyList());
