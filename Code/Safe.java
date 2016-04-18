@@ -10,14 +10,25 @@ public class Safe {
     }
     
     public void addKey(Key entry){
+        boolean renameKey = false;
         Key duplicateKey = getKeyByName(entry.getName()); //gets a duplicate key, if any
-        if(duplicateKey == null && entry.checkName() == 0){ //no duplicates, and Key class approved the name
-            keyList.add(entry);
-        }else{ //replace the name with UnnamedKey_X, where X is the number of keys it has replaced previously 
+        if(duplicateKey == null && entry.checkName() == 0){ //no duplicates, and Key class approved the name, and does not start with "UnnamedKey_"
+            if(entry.getName().length() > 10){
+                System.out.println(entry.getName().substring(0,11));
+                if(entry.getName().substring(0,11).equals("UnnamedKey_")){
+                    renameKey = true;
+                }
+            }
+        }else{ //duplicate found
+            renameKey = true;
+        }
+        
+        if(renameKey){//replace the name with UnnamedKey_X, where X is the number of keys it has replaced previously 
             numDuplicates++;
             String newName = "UnnamedKey_" + Integer.toString(numDuplicates);
             entry.setName(newName);
-            
+            keyList.add(entry);
+        }else{
             keyList.add(entry);
         }
     }
@@ -32,6 +43,13 @@ public class Safe {
     }
     public Key getKeyByName(String name){
         int index = findKeyIndex(name,"name");
+        if(index == -1){
+            return null; //matched key not found
+        }else{
+            return keyList.get(index); //returns key with matching name
+        }
+    }
+    public Key getKeyByIndex(int index){
         if(index == -1){
             return null; //matched key not found
         }else{
