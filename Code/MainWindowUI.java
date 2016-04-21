@@ -8,6 +8,7 @@ public class MainWindowUI extends JFrame {
     
     //the safe
     private Safe safe;
+    private Encryptor encryptor;
     private int okButtonMode; //0 for off, 1 for add key, 2 for edit key
     private int editIndex; //index of the smallest item selected, for key editing purposes
     
@@ -53,9 +54,10 @@ public class MainWindowUI extends JFrame {
     private JButton s_cancelButton;
 
     // Constructor of main frame
-    public MainWindowUI(Safe _safe) {
+    public MainWindowUI(Safe _safe, Encryptor _encryptor) {
         
         safe = _safe;
+        encryptor = _encryptor;
         okButtonMode = 0;
         
         // Set the main frame data
@@ -242,10 +244,10 @@ public class MainWindowUI extends JFrame {
             new ActionListener(){
                 public void actionPerformed(ActionEvent event){
                     if(okButtonMode == 1){
-                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText()),s_websiteField.getText(),s_descriptionField.getText()));
+                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText(),encryptor),s_websiteField.getText(),s_descriptionField.getText()));
                     }else if(okButtonMode == 2){
                         safe.removeKeyByIndex(editIndex);
-                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText()),s_websiteField.getText(),s_descriptionField.getText()));
+                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText(),encryptor),s_websiteField.getText(),s_descriptionField.getText()));
                     }
                     okButtonMode = 0;
                     updateJList(safe.getKeyList());
