@@ -32,7 +32,6 @@ public class Safe {
             keyList.add(entry);
         }
     }
-    
     public Key getKeyByUsername(String username){
         int index = findKeyIndex(username,"username");
         if(index == -1){
@@ -56,11 +55,9 @@ public class Safe {
             return keyList.get(index); //returns key with matching name
         }
     }
-    
     public ArrayList<Key> getKeyList(){
         return keyList;
     }
-    
     public Key removeKeyByName(String name){
         int index = findKeyIndex(name,"name");
         if(index == -1){

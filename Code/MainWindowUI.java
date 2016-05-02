@@ -244,10 +244,10 @@ public class MainWindowUI extends JFrame {
             new ActionListener(){
                 public void actionPerformed(ActionEvent event){
                     if(okButtonMode == 1){
-                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText(),encryptor),s_websiteField.getText(),s_descriptionField.getText()));
+                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText(),encryptor),s_descriptionField.getText(),s_websiteField.getText()));
                     }else if(okButtonMode == 2){
                         safe.removeKeyByIndex(editIndex);
-                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText(),encryptor),s_websiteField.getText(),s_descriptionField.getText()));
+                        safe.addKey(new Key(s_nameField.getText(),s_usernameField.getText(),new Password(s_passwordField.getText(),encryptor),s_descriptionField.getText(),s_websiteField.getText()));
                     }
                     okButtonMode = 0;
                     updateJList(safe.getKeyList());

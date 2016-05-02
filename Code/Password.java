@@ -10,6 +10,7 @@ public class Password {
     public String getPassword(){
         return encryptor.decrypt(encryptedPwd);
     }
+    
     public void setEncryptedPassword(String _encryptedPwd){
         encryptedPwd = _encryptedPwd;
     }
